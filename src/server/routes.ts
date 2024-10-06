@@ -18,6 +18,7 @@ export async function elevationByCoord(
     const long = req.query?.long;
 
     if (!lat || !long) {
+      res.statusCode = 412;
       res.send(
         `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
       );
@@ -36,6 +37,7 @@ export async function elevationByCoord(
 
     res.send(response);
   } catch (error) {
+    res.statusCode = 412;
     res.send(
       `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
     );
@@ -55,6 +57,7 @@ export async function slopeInChunk(
     const long = parseFloat(`${req.query?.long}`);
 
     if (!lat || !long) {
+      res.statusCode = 412;
       res.send(
         `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
       );
@@ -104,9 +107,9 @@ export async function slopeInChunk(
     const dY = Math.max(...y) - Math.min(...y);
     const dZ = Math.max(...z) - Math.min(...z);
 
-    console.log("dX",dX);
-    console.log("dY",dY);
-    console.log("dZ",dZ);
+    console.log("dX", dX);
+    console.log("dY", dY);
+    console.log("dZ", dZ);
 
     const slope = Math.atan(dZ / Math.sqrt(dX * dX + dY * dY));
     const degSlope = (slope * 180) / Math.PI;
@@ -118,6 +121,7 @@ export async function slopeInChunk(
     res.send(response);
   } catch (error) {
     console.log(error);
+    res.statusCode = 412;
     res.send(
       `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
     );
