@@ -127,3 +127,38 @@ export async function slopeInChunk(
     );
   }
 }
+
+export async function report(
+  req: express.Request,
+  res: express.Response,
+) {
+  try {
+    logRequest(req);
+
+    const lat = req.query?.lat;
+    const long = req.query?.long;
+
+    if (!lat || !long) {
+      res.statusCode = 412;
+      res.send(
+        `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+      );
+      return;
+    }
+
+    const queryUrl = 'https://wttr.in/Campo_Mourao?format=j1';
+
+    const googleRes = await axios.get(queryUrl);
+
+    const response = {
+      current_data: googleRes.data
+    };
+
+    res.send(response);
+  } catch (error) {
+    res.statusCode = 412;
+    res.send(
+      `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+    );
+  }
+}
