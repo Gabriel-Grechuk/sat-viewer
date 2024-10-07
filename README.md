@@ -29,3 +29,22 @@ Example
 ```
 http://localhost:8080/slope?lat=-24.0407865&long=-52.3517281
 ```
+
+### `/repor`
+
+Query args:
+
+- `lat`: double
+- `long`: double
+
+Example
+
+```
+http://localhost:8080/report?lat=-24.0407865&long=-52.3517281
+```
+
+
+## Running
+``` bas
+docker compose up --build
+```
