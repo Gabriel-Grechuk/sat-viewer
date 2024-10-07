@@ -4,7 +4,8 @@ import axios from "axios";
 
 export function index(req: express.Request, res: express.Response) {
   logRequest(req);
-  res.send("<h1>Opa, bão</h1>");
+  res.send(`<h1>Sat Viewer API, by GeoGuardians - Luna</h1>
+           <p>check more details in: <a href="https://github.com/Gabriel-Grechuk/sat-viewer">https://github.com/Gabriel-Grechuk/sat-viewer</a><\p>`);
 }
 
 export async function elevationByCoord(
@@ -20,7 +21,7 @@ export async function elevationByCoord(
     if (!lat || !long) {
       res.statusCode = 412;
       res.send(
-        `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+        `<h1>Argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
       );
       return;
     }
@@ -39,7 +40,7 @@ export async function elevationByCoord(
   } catch (error) {
     res.statusCode = 412;
     res.send(
-      `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+      `<h1>Argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
     );
   }
 }
@@ -59,7 +60,7 @@ export async function slopeInChunk(
     if (!lat || !long) {
       res.statusCode = 412;
       res.send(
-        `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+        `<h1>Argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
       );
       return;
     }
@@ -123,15 +124,12 @@ export async function slopeInChunk(
     console.log(error);
     res.statusCode = 412;
     res.send(
-      `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+      `<h1>Argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
     );
   }
 }
 
-export async function report(
-  req: express.Request,
-  res: express.Response,
-) {
+export async function report(req: express.Request, res: express.Response) {
   try {
     logRequest(req);
 
@@ -141,24 +139,24 @@ export async function report(
     if (!lat || !long) {
       res.statusCode = 412;
       res.send(
-        `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+        `<h1>Argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
       );
       return;
     }
 
-    const queryUrl = 'https://wttr.in/Campo_Mourao?format=j1';
+    const queryUrl = "https://wttr.in/Campo_Mourao?format=j1";
 
     const googleRes = await axios.get(queryUrl);
 
     const response = {
-      current_data: googleRes.data
+      current_data: googleRes.data,
     };
 
     res.send(response);
   } catch (error) {
     res.statusCode = 412;
     res.send(
-      `<h1>Deu errado pai, argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
+      `<h1>Argumentos inválidos</h1><p>Args:</p><p>${JSON.stringify(req.query)}</p>`,
     );
   }
 }
