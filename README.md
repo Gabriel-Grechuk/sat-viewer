@@ -30,7 +30,7 @@ Example
 http://localhost:8080/slope?lat=-24.0407865&long=-52.3517281
 ```
 
-### `/repor`
+### `/report`
 
 Query args:
 
